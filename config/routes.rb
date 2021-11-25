@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   # get 'articles/:id/edit' => 'articles#edit', as :edit_article
   # put 'articles:id'
 
-  resources :articles
+root to: "static#home"
 
+resources :articles do
+  resources :comments
 end
- 
+end
+

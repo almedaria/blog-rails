@@ -1,0 +1,23 @@
+%h1= @article.title
+
+%p= @article.content
+
+%hr
+
+%table
+  %thead
+    %tr
+      %th Comment 
+      %th Actions 
+  %tbody
+  - @comments.each do |comment|
+    %tr
+      %td= comment.content
+      %td
+        -# = link_to 'Edit', article_comment_path(comment.id)
+        -# = link_to 'Delete'. article_comment_path(comment.id), method: :delete, data: {confirm: "Are you sure?"}
+
+= render 'comments/form'
+
+%br
+= link_to "Back to Articles", articles_path
