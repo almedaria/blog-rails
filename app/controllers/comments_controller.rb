@@ -1,8 +1,11 @@
 class CommentsController < ApplicationController
-     before_action :set_article
+    before_action :set_article
+    before_action :set_comment, only:[:edit, :update, :destroy, :set_comment]
      def index
         redirect_to article_path(@article)
      end
+
+
 
     def create
         @comment = @article.comments.build(comment_params)
@@ -13,6 +16,10 @@ class CommentsController < ApplicationController
             @comments = @article.comments
             render 'articles/show'
         end
+    end
+    
+    def edit
+
     end
 
     def update
@@ -27,8 +34,9 @@ class CommentsController < ApplicationController
 
     def destroy
         @comment.destroy
-        redirect_to article_comments_path, notice: 'An article was successfully destoryed'
-    end
+        redirect_to article_path(@article)
+ 
+      end
 
     private
 
@@ -38,5 +46,9 @@ class CommentsController < ApplicationController
 
     def set_article
         @article = Article.find(params[:article_id])
+    end
+
+    def set_comment
+        @comment = @article.comments.find(params[:id])
     end
 end
